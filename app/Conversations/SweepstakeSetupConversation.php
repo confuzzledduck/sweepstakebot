@@ -14,15 +14,14 @@ class SweepstakeSetupConversation extends Conversation
 	protected $_type = null;
 	protected $_question = null;
 
-		/**
-		* Start the conversation
-		*/
-		public function run() {
-		
-			$this->say('OK. Let\'s start a new sweepstake. I need to know some stuff to get started.');
-			$this->askQuestion();
-			//$this->askType();
-				
+	/**
+	* Start the conversation
+	*/
+	public function run() {
+	
+		$this->say('OK. Let\'s start a new sweepstake. I need to know some stuff to get started.');
+		$this->askQuestion();
+
 	}
 
 	public function askQuestion() {
