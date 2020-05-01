@@ -12,6 +12,7 @@ class SweepstakeSetupConversation extends Conversation
 {
 
 	protected $_type = null;
+	protected $_question = null;
 
 		/**
 		* Start the conversation
@@ -44,16 +45,23 @@ class SweepstakeSetupConversation extends Conversation
 			->callbackId('ask_reason')
 			->addButtons([
 				Button::create('Each player selects their own value (for something like a like a baby weight sweepstake).')->value('values'),
-				Button::create('Each player is assigned an option from a list I will provide.')->value('list'),
+				Button::create('An option from a fixed list is chosen at random for each player.')->value('list-random'),
+				Button::create('Each player can select an option from a fixed list.')->value('list-selected')
 			]);
 
 		return $this->ask($question, function (Answer $answer) {
 			if ($answer->isInteractiveMessageReply()) {
 				$this->_type = $answer->getValue();
-				if ($answer->getValue() === 'values') {
-					$this->say('Values, ay? Tricky.');
-				} else {
-					$this->say('Ah, a list.');
+				switch ($this->_type) {
+					case 'values':
+						$this->say('Values, ay? Tricky.');
+						break;
+					case 'list-random':
+						$this->say('Nothing like a random option.');
+						break;
+					case 'list-selected':
+						$this->say('So they get to choose their own, do they?!');
+						break;
 				}
 			}
 		});
