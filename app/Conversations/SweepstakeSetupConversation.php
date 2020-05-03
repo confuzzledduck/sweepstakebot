@@ -53,7 +53,7 @@ class SweepstakeSetupConversation extends Conversation
 				$this->_type = $answer->getValue();
 				switch ($this->_type) {
 					case 'values':
-						$this->say('Values, ay? Tricky.');
+						$this->bot->startConversation(new SweepstakeValuesConversation());
 						break;
 					case 'list-random':
 						$this->say('Nothing like a random option.');
