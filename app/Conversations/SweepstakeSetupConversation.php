@@ -56,10 +56,10 @@ class SweepstakeSetupConversation extends Conversation
 						$this->bot->startConversation(new SweepstakeValuesConversation());
 						break;
 					case 'list-random':
-						$this->say('Nothing like a random option.');
+						$this->bot->startConversation(new SweepstakeRandomOptionConversation());
 						break;
 					case 'list-selected':
-						$this->say('So they get to choose their own, do they?!');
+						$this->bot->startConversation(new SweepstakeSelectOptionConversation());
 						break;
 				}
 			}
