@@ -16,7 +16,8 @@ class CreateSweepstakeTable extends Migration
 		Schema::create('sweepstake', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('owner');
-			$table->enum('type', ['value', 'random_option', 'select_option']);
+			$table->string('name');
+			$table->enum('type', ['value', 'option_random', 'option_select']);
 			$table->timestamps();
 		});
 	}
