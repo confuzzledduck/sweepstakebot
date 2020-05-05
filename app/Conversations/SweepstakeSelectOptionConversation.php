@@ -11,6 +11,14 @@ use BotMan\BotMan\Messages\Conversations\Conversation;
 class SweepstakeSelectOptionConversation extends Conversation
 {
 
+	protected $_sweepstakeModel;
+
+	function __construct($sweepstakeModel) {
+
+		$this->_sweepstakeModel = $sweepstakeModel;
+
+	}
+
 	/**
 	* Start the conversation
 	*/

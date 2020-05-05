@@ -69,13 +69,13 @@ class SweepstakeSetupConversation extends Conversation
 				
 				switch ($answer->getValue()) {
 					case 'value':
-						$this->bot->startConversation(new SweepstakeValuesConversation());
+						$this->bot->startConversation(new SweepstakeValuesConversation($this->_sweepstakeModel));
 						break;
 					case 'option_random':
-						$this->bot->startConversation(new SweepstakeRandomOptionConversation());
+						$this->bot->startConversation(new SweepstakeRandomOptionConversation($this->_sweepstakeModel));
 						break;
 					case 'option_select':
-						$this->bot->startConversation(new SweepstakeSelectOptionConversation());
+						$this->bot->startConversation(new SweepstakeSelectOptionConversation($this->_sweepstakeModel));
 						break;
 				}
 			}
