@@ -8,18 +8,25 @@ use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 
-class SweepstakeRandomOptionConversation extends Conversation
+class SweepstakeSetupOptionsConversation extends Conversation
 {
+
+	protected $_options = array();
 
 	/**
 	* Start the conversation
 	*/
 	public function run() {
 
-		$this->say('Random option conversation.');
-		$this->bot->startConversation(new SweepstakeSetupOptionsConversation());
-		//$this->askQuestion();
+		$this->say('Setup options conversation.');
+		$this->askForOptions();
 
+	}
+	
+	public function askForOptions() {
+	
+		//
+	
 	}
 
 }
