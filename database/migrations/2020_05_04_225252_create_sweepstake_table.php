@@ -13,7 +13,7 @@ class CreateSweepstakeTable extends Migration
 	*/
 	public function up()
 	{
-		Schema::create('sweepstake', function (Blueprint $table) {
+		Schema::create('sweepstakes', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('owner');
 			$table->string('name');
