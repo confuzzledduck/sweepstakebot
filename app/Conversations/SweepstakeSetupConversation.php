@@ -29,11 +29,11 @@ class SweepstakeSetupConversation extends Conversation
 		
 		// And move on to asking the question...
 		$this->say('OK. Let\'s start a new sweepstake. I need to know some stuff to get started.');
-		$this->askQuestion();
+		$this->askTitle();
 
 	}
 
-	public function askQuestion() {
+	public function askTitle() {
 
 		$this->say('The first thing to set up is the title of the sweepstake. It could be a question or it could just be a title, it kind of depends on what the game is.');
 		$this->say('It might be a sporting event, so the title might just be "The Olympics". Or it might be a baby sweepstake, so the title might be a question like "How much will Jenny\'s baby weigh?" It\' up to you.');
