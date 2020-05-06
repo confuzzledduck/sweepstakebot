@@ -8,17 +8,15 @@ use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 
-class SweepstakeSelectOptionConversation extends SweepstakeSubConversationAbstract
+abstract class SweepstakeSubConversationAbstract extends Conversation
 {
 
-	/**
-	* Start the conversation
-	*/
-	public function run() {
+	protected $_sweepstakeModel;
 
-		$this->say('Select option conversation.');
-		//$this->askQuestion();
-
+	function __construct($sweepstakeModel) {
+	
+		$this->_sweepstakeModel = $sweepstakeModel;
+		
 	}
 
 }

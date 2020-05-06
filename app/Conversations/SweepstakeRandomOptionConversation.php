@@ -8,16 +8,8 @@ use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 
-class SweepstakeRandomOptionConversation extends Conversation
+class SweepstakeRandomOptionConversation extends SweepstakeSubConversationAbstract
 {
-
-	protected $_sweepstakeModel;
-
-	function __construct($sweepstakeModel) {
-
-		$this->_sweepstakeModel = $sweepstakeModel;
-
-	}
 
 	/**
 	* Start the conversation
@@ -25,7 +17,7 @@ class SweepstakeRandomOptionConversation extends Conversation
 	public function run() {
 
 		$this->say('Random option conversation.');
-		$this->bot->startConversation(new SweepstakeSetupOptionsConversation());
+		$this->bot->startConversation(new SweepstakeSetupOptionsConversation($this->_sweepstakeModel));
 		//$this->askQuestion();
 
 	}
