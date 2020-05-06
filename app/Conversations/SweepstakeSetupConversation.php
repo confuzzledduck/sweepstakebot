@@ -25,7 +25,7 @@ class SweepstakeSetupConversation extends Conversation
 		$this->_sweepstakeModel = new Sweepstake;
 
 		// Set the sweep's owner...
-    $this->_sweepstakeModel->owner = $this->bot->getUser()->getId();
+        $this->_sweepstakeModel->owner = $this->bot->getUser()->getId();
 		
 		// And move on to asking the question...
 		$this->say('OK. Let\'s start a new sweepstake. I need to know some stuff to get started.');
