@@ -14,11 +14,15 @@ class CreateSweepstakeTable extends Migration
 	public function up()
 	{
 		Schema::create('sweepstakes', function (Blueprint $table) {
+
 			$table->increments('id');
 			$table->string('owner');
 			$table->string('name');
 			$table->enum('type', ['value', 'option_random', 'option_select']);
 			$table->timestamps();
+			
+			$table->index('owner');
+			
 		});
 	}
 
