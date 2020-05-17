@@ -2,7 +2,6 @@
 
 namespace App\Conversations;
 
-use Illuminate\Foundation\Inspiring;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 
 abstract class SweepstakeSubConversationAbstract extends Conversation
