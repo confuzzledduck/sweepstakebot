@@ -63,10 +63,6 @@ class SweepstakeSetupConversation extends Conversation
 		return $this->ask($question, function (Answer $answer) {
 			if ($answer->isInteractiveMessageReply()) {
 				
-				// Add the type to the model, and then save it to the database...
-				$this->_sweepstakeModel->type = $answer->getValue();
-				$this->_sweepstakeModel->save();
-				
 				switch ($answer->getValue()) {
 					case 'value':
 						$this->bot->startConversation(new SweepstakeValuesConversation($this->_sweepstakeModel));

@@ -13,6 +13,10 @@ class SweepstakeSelectOptionConversation extends SweepstakeSubConversationAbstra
 	* Start the conversation
 	*/
 	public function run() {
+		
+		// Add the type to the model, and then save it to the database...
+		$this->_sweepstakeModel->type = 'option_select';
+		$this->_sweepstakeModel->save();
 
 		$this->say('Select option conversation.');
 		//$this->askQuestion();

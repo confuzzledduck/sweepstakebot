@@ -14,7 +14,11 @@ class SweepstakeRandomOptionConversation extends SweepstakeSubConversationAbstra
 	*/
 	public function run() {
 
-		$this->say('Random option conversation.');
+		// Add the type to the model, and then save it to the database...
+		$this->_sweepstakeModel->type = 'option_random';
+		$this->_sweepstakeModel->save();
+
+		// Jump to the options setup conversation...
 		$this->bot->startConversation(new SweepstakeSetupOptionsConversation($this->_sweepstakeModel));
 
 	}
