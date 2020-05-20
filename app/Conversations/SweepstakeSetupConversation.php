@@ -14,7 +14,7 @@ class SweepstakeSetupConversation extends Conversation
 {
 
 	// Sweepstake model instance variable...
-	protected $_sweepstakeModel;
+	public $_sweepstakeModel;
 
 	/**
 	* Start the conversation
@@ -44,7 +44,9 @@ class SweepstakeSetupConversation extends Conversation
 			// Add the name to the model...
 			$this->_sweepstakeModel->name = $answer->getText();
 			
+			// Move on to ask about the game type...
 			$this->askType();
+			
 		});
 
 	}
@@ -61,22 +63,89 @@ class SweepstakeSetupConversation extends Conversation
 			]);
 
 		return $this->ask($question, function (Answer $answer) {
+			
 			if ($answer->isInteractiveMessageReply()) {
+				
+				// Add the type to the model, and then save it to the database...
+				$this->_sweepstakeModel->type = $answer->getValue();
+				$this->_sweepstakeModel->save();
 				
 				switch ($answer->getValue()) {
 					case 'value':
-						$this->bot->startConversation(new SweepstakeValuesConversation($this->_sweepstakeModel));
+						$this->askDates();
 						break;
 					case 'option_random':
-						$this->bot->startConversation(new SweepstakeRandomOptionConversation($this->_sweepstakeModel));
-						break;
 					case 'option_select':
-						$this->bot->startConversation(new SweepstakeSelectOptionConversation($this->_sweepstakeModel));
+						$this->askOptions();
 						break;
 				}
+				
 			}
+			
 		});
+		
 
 	}
+	
+	public function askOptions() {
 		
+		// Preamble...
+		$this->say('In these kinds of games, you need to give users a list of options.');
+		$this->say('Don\'t forget, you can add, edit and remove options at any time before the game begins. but once it\'s started you can\'t make any more changes.');
+		
+		// Ask for options...
+		$this->say('Possible options should be provided as a comma separated list, ie. "option one, option two, etc.".');
+		return $this->ask('Tell me the valid options in this game.', function (Answer $answer) {
+			
+			// Fetch the answer, which should be a CSV-style list...
+			if (strlen($answer->getText()) > 0) {
+
+				$optionList = str_getcsv($answer->getText());
+				
+				$this->say('Thanks. I\'ll add '.number_format(count($optionList)).' new options to this game.');
+				
+				// Save the options into the database...
+				foreach ($optionList AS $optionValue) {
+					$optionEntry = new \App\SweepstakeOption;
+					$optionEntry->sweepstake_id = $this->_sweepstakeModel->id;
+					$optionEntry->option = $optionValue;
+					$optionEntry->save();
+				}
+				
+				// And move on to dates,,,
+				$this->askDates();
+			
+			} else {
+
+				$question = Question::create('I didn\'t recognise any options in your last message. Do you want to try again?')
+					->fallback('Unable to ask question')
+					->callbackId('ask_reason')
+					->addButtons([
+						Button::create('Yes, please.')->value('yes'),
+						Button::create('No. I want to stop building this game.')->value('no')
+					]);
+
+				$this->ask($question, function (Answer $answer) {
+					if ($answer->isInteractiveMessageReply()) {
+						if ($answer->getValue() == 'yes') {
+							$this->askOptions();
+						} else {
+							// TODO: Abort procedure.
+							$this->say('Abort');
+						}
+					}
+				});
+
+			}
+			
+		});
+		
+	}
+	
+	public function askDates() {
+		
+		$this->say('Ask dates');
+		
+	}
+
 }
