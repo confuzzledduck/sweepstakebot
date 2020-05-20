@@ -102,7 +102,8 @@ class SweepstakeSetupConversation extends Conversation
 
 				$optionList = str_getcsv($answer->getText());
 				
-				$this->say('Thanks. I\'ll add '.number_format(count($optionList)).' new options to this game.');
+				$optionCount = count($optionList);
+				$this->say('Thanks. I\'ll add '.number_format($optionCount).' new '.(($optionCount > 1) ? 'options' : 'option').' to this game.');
 				
 				// Save the options into the database...
 				foreach ($optionList AS $optionValue) {
