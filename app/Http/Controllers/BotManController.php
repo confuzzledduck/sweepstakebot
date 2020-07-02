@@ -31,13 +31,17 @@ class BotManController extends Controller
      * Loaded through routes/botman.php
      * @param  BotMan $bot
      */
-    public function startConversation(BotMan $bot)
-    {
-        $bot->startConversation(new ExampleConversation());
-    }
 	
 	public function newSweepstake(BotMan $bot) {
         $bot->startConversation(new SweepstakeSetupConversation());
+	}
+	
+	public function editSweepstake(BotMan $bot) {
+        $bot->startConversation(new SweepstakeEditConversation());
+	}
+	
+	public function viewSweepstake(BotMan $bot) {
+        $bot->startConversation(new SweepstakeViewConversation());
 	}
 	
 }

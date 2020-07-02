@@ -4,9 +4,7 @@ use App\Http\Controllers\SweepstakeBotController;
 
 $botman = resolve('botman');
 
-$botman->hears('Hi', function ($bot) {
-    $bot->reply('Hello!');
-});
-$botman->hears('Start conversation', BotManController::class.'@startConversation');
-
+// Routes for sweepstake functionality...
 $botman->hears('New', BotManController::class.'@newSweepstake');
+$botman->hears('Edit', BotManController::class.'@editSweepstake');
+$botman->hears('View', BotManController::class.'@viewSweepstake');
