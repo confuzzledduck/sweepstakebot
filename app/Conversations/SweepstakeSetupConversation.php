@@ -259,7 +259,8 @@ class SweepstakeSetupConversation extends Conversation
 
 	public function closingStatements() {
 
-		//...
+		$this->say('That\'s all I need to know for now.');
+		$this->say('Don\'t forget you can make changes to the game by starting a conversation with me by saying "edit", and you can view who has entered and what their choices are by saying "view".');
 
 	}
 
